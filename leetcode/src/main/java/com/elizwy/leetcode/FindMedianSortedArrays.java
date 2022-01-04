@@ -31,7 +31,7 @@ public class FindMedianSortedArrays {
 
             }else {
                 for(int i=0;i<=totalLength/2;i++){
-                    if (nums1[index1] <nums2[index2]) {
+                    if (element(index1,nums1) < element(index2,nums2)) {
                         result= element(index1,nums1);
                         index1++;
                     }else {
