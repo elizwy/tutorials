@@ -4,8 +4,12 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
+import java.util.LinkedList;
+import java.util.List;
 
 public class AgentMainDemo {
+
+    private static String className="javaagent.DemoMain";
 
     public static void premain(String args, Instrumentation inst) {
         main(args, inst);
@@ -26,8 +30,15 @@ public class AgentMainDemo {
                     return new byte[0];
                 }
             }, true);
-            Class<?> clazz = Class.forName("com.elizwy.javatech.javaagent.ReTransformDemo");
-            inst.retransformClasses(clazz);
+
+            List<Class> needRetransFormClasses = new LinkedList<>();
+            Class[] loadedClass = inst.getAllLoadedClasses();
+            for (int i = 0; i < loadedClass.length; i++) {
+                if (loadedClass[i].getName().equals(className)) {
+                    needRetransFormClasses.add(loadedClass[i]);
+                }
+            }
+            inst.retransformClasses(needRetransFormClasses.toArray(new Class[0]));
         } catch (Exception e) {
             e.printStackTrace();
         }

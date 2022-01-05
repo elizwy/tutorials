@@ -11,7 +11,7 @@ public class AttachMain {
     public static void main(String[] args) throws IOException, AttachNotSupportedException, AgentLoadException, AgentInitializationException {
         VirtualMachine vm=null;
         try {
-            vm=VirtualMachine.attach("15837");
+            vm=VirtualMachine.attach("18094");
             vm.loadAgent("/Users/elizwy/coding/zwy/tutorials/javaTech/target/javaTech-1.0-SNAPSHOT-jar-with-dependencies.jar");
         }finally {
             if(vm !=null){
